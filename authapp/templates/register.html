@@ -8,15 +8,21 @@
         <title>Registro</title>
     </head>
     <body>
-        <header><h1>Registro</h1></header>
-        <div class="formulario">
-            <form method="POST">
+        <div class="background"></div>
+
+        <div class="login-container">
+            <h1>Registro</h1>
+            <form method="POST" class="login-form">
                 {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit">Registrarse</button>
+                {{ form.as_p }}
+                <button type="submit" class="btn">Registrarse</button>
             </form>
+
+            <div class="divider">¿Ya tenés cuenta?</div>
+
             <form action="{% url 'login' %}">
-                <button type="submit">Ir a inicio de sesion</button>
+                <button type="submit" class="btn secondary">Ir a inicio de
+                    sesión</button>
             </form>
         </div>
     </body>

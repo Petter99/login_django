@@ -5,11 +5,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load static %}
         <link rel="stylesheet" href="{% static 'authapp/css/style.css' %}">
-        <title>error</title>
+        <title>Error</title>
     </head>
     <body>
-        <header><h1>Error</h1></header>
-        <p>{{error}}</p>
-        <a href="{% url 'login' %}">Volver al inicio de sesión</a>
+        <div class="background"></div>
+
+        <div class="login-container">
+            <h1 style="color: #dc3545;">ha ocurrido un error</h1>
+            <p style="color: #333;">{{ error }}</p>
+
+            <form action="{% url 'login' %}">
+                <button type="submit" class="btn secondary">Volver al inicio de
+                    sesión</button>
+            </form>
+        </div>
     </body>
 </html>

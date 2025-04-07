@@ -21,7 +21,7 @@ def login_view(request):
                 if validatePassword(password, user.password):
                     request.session['user_id'] = user.id
                     request.session['username'] = user.email
-                    request.session.set_expiry(3600)
+                    request.session.set_expiry(30)
                 #return dashboard
                     return redirect('dashboard')
                 else:
@@ -53,13 +53,24 @@ def register_view(request):
         #form = RegisterUserForm()
         return render(request, "register.html", {"form": form})
 
+from django.shortcuts import render, redirect
+
 def dashboard_view(request):
     if 'user_id' in request.session:
         user_id = request.session['user_id']
         usuario = request.session['username']
-        return HttpResponse(f'Bienvenido {usuario} Su ID es {user_id}')
-    else: 
+        context = {
+            'user_id': user_id,
+            'usuario': usuario
+        }
+        response = render(request, 'dashboard.html', context)
+        response['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+        response['Pragma'] = 'no-cache'
+        response['Expires'] = '0'
+        return response
+    else:
         return redirect('login')
+
 
 def logout_view(request):
     logout(request)

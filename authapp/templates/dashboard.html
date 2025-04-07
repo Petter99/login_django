@@ -5,10 +5,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {% load static %}
         <link rel="stylesheet" href="{% static 'authapp/css/style.css' %}">
-        <title>Inicio</title>
+        <title>Dashboard</title>
     </head>
     <body>
-        <header><h1>Inicio</h1></header>
-        <h2>bienvenido {{ user.email }}</h2><br>
+        <div class="background"></div>
+
+        <div class="dashboard-container">
+            <header class="dashboard-header">
+                <h1>Bienvenido, {{ usuario }}</h1>
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn logout-btn">Cerrar
+                        sesión</button>
+                </form>
+            </header>
+
+            <main class="dashboard-main">
+                <p class="user-info">Su ID es: {{ user_id }}</p>
+            </main>
+        </div>
     </body>
 </html>
